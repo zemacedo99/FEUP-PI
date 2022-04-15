@@ -9,5 +9,7 @@
 ../tgff kseries_parallel_xover
 ../tgff packed
 ../tgff packets
+../tgff robtst
 ../tgff simple
+../tgff sp_rand
 
