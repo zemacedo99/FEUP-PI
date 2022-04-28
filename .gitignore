@@ -31,6 +31,9 @@
 *.out
 *.app
 
+# TGFF input
+*.tgffopt
+
 # TGFF output
 *.eps
 *.tgff
