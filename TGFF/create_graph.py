@@ -1,18 +1,25 @@
 import argparse
+import sys
 
 # TODO : ErrorHandling
 # TODO: Parameters Type Checking
 
 def main():
      
-     parser = argparse.ArgumentParser(description='Help')
+     parser = argparse.ArgumentParser()
      parser.add_argument('-basic',action='store_true', dest='basic_command', help='Basic commands')
      parser.add_argument('-task', action='store_true', dest='task_graph_generation', help='Task graph generation')
 
+     if len(sys.argv)==1:
+          parser.print_help(sys.stderr)
+          sys.exit(1)
+          
      args = parser.parse_args()
+     
      print("Basic commads: "+ str(args.basic_command))
      print("Task graph generation commads: " + str(args.task_graph_generation))
 
+          
 
      f = open("demofile.tgffopt", "w")
      
