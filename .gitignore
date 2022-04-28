@@ -30,3 +30,10 @@
 *.exe
 *.out
 *.app
+
+# TGFF output
+*.eps
+*.tgff
+*.vcg
+
+**/tgff-to-dag-parser-master

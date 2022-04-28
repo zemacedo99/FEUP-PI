@@ -1,0 +1,7 @@
+# TGFF input
+*.tgffopt
+
+# TGFF output
+*.eps
+*.tgff
+*.vcg
