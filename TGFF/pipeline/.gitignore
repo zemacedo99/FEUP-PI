@@ -1,0 +1,11 @@
+# TGFF input
+*.tgffopt
+
+# TGFF output
+*.eps
+*.tgff
+*.vcg
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]

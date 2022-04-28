@@ -1,15 +1,14 @@
-import argparse
 import sys
+import utils
 
 # TODO : ErrorHandling
 # TODO: Parameters Type Checking
 
 def main():
      
-     parser = argparse.ArgumentParser()
-     parser.add_argument('-basic',action='store_true', dest='basic_command', help='Basic commands')
-     parser.add_argument('-task', action='store_true', dest='task_graph_generation', help='Task graph generation')
-
+     utils.clear()
+     parser = utils.init_args_parser()
+     
      if len(sys.argv)==1:
           parser.print_help(sys.stderr)
           sys.exit(1)
@@ -81,7 +80,10 @@ def main():
 
      #open and read the file
      f = open("demofile.tgffopt", "r")
+     utils.clear()
+     print("tgffopt file created")
      print(f.read())
+     
      
      
 main()
