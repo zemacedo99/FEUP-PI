@@ -85,6 +85,7 @@ def main():
      utils.clear()
      print(tgffopt_file_name+" created")
      print(f.read())
+     f.close()
      
      
      
