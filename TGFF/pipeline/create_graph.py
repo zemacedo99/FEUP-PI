@@ -25,37 +25,37 @@ def main():
      f = open(tgffopt_file_name, "w")
      
      if(args.basic_command):
-          print("Give the seed for the pseudo-random number generator")
+          print("<int> Give the seed for the pseudo-random number generator")
           seed = input()
           f.write("seed " + seed)
           f.write("\n")
           
      if(args.task_graph_generation):
-          print("Give the number of task graphs to generate")
+          print("<int> Give the number of task graphs to generate")
           tg_cnt = input()
           
-          print("Give the (case dependent) label used for task graphs.")
+          print("<string> Give the (case dependent) label used for task graphs.")
           tg_label = input()
           
-          print("(default 0) Give the start index for named task graph.")
+          print("<string> <int> (default 0) Give the start index for named task graph.")
           tg_offset = input()
           
-          print("Give the minimum number of tasks per task graph (average, multiplier).")
+          print("<int> <int> Give the minimum number of tasks per task graph (average, multiplier).")
           task_cnt = input()
           
-          print("Give the number of possible transmit types")
+          print("<int> Give the number of possible transmit types")
           trans_type_cnt = input()
           
-          print("Give the multipliers for periods in multi-rate systems.")
+          print("<list(<int>)> Give the multipliers for periods in multi-rate systems.")
           period_mul = input()
           
-          print("(default 1.0) Give the probability that a graph is periodic.")
+          print("<flt> (default 1.0) Give the probability that a graph is periodic.")
           prob_periodic = input()
           
-          print("(default 0.0) Give the probability that a graph has more than one start node.")
+          print("<flt> (default 0.0) Give the probability that a graph has more than one start node.")
           prob_multi_start_nodes = input()
           
-          print("Give the number of start nodes for graphs which have multiple start nodes (average,multiplier).")
+          print("<int> <int> Give the number of start nodes for graphs which have multiple start nodes (average,multiplier).")
           start_node = input()
           
           f.write("tg_cnt " + tg_cnt)
