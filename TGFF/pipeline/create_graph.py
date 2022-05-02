@@ -1,5 +1,6 @@
 import sys
 import utils
+import os
 
 # TODO : ErrorHandling
 # TODO: Parameters Type Checking
@@ -18,9 +19,9 @@ def main():
      print("Basic commads: "+ str(args.basic_command))
      print("Task graph generation commads: " + str(args.task_graph_generation))
 
-          
+     dir_path = os.path.dirname(os.path.realpath(__file__))
      print("name of the tgffopt file: ")
-     tgffopt_file_name = input() + ".tgffopt"
+     tgffopt_file_name = dir_path + '/' + input() + ".tgffopt"
      f = open(tgffopt_file_name, "w")
      
      if(args.basic_command):
@@ -82,7 +83,7 @@ def main():
      #open and read the file
      f = open(tgffopt_file_name, "r")
      utils.clear()
-     print("tgffopt file created")
+     print(tgffopt_file_name+" created")
      print(f.read())
      
      
