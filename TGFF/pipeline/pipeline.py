@@ -20,10 +20,16 @@ def main():
             os.system(create_graph)
         
         elif option == '2':
+            tgff_dir = "~/Documents/PI/TGFF/tgff-3.6/tgff "
+
             print("name of the tgffopt file: ")
-            tgffopt_file = input()
-            tgffopt_to_tgff = './tgff '+ dir_path + tgffopt_file
+            tgffopt_file_name = input()
+            tgffopt_file = dir_path + '/'+ tgffopt_file_name
+            
+            tgffopt_to_tgff = tgff_dir + tgffopt_file
             os.system(tgffopt_to_tgff)
+            utils.clear()
+            print(tgffopt_file_name +".tgff created")
             
         elif option == '3':
             tgff_to_dot_parser = 'python3 '+ dir_path + '/tgff_to_dot_parser.py '

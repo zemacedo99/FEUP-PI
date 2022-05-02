@@ -19,8 +19,9 @@ def main():
      print("Task graph generation commads: " + str(args.task_graph_generation))
 
           
-
-     f = open("demofile.tgffopt", "w")
+     print("name of the tgffopt file: ")
+     tgffopt_file_name = input() + ".tgffopt"
+     f = open(tgffopt_file_name, "w")
      
      if(args.basic_command):
           print("Give the seed for the pseudo-random number generator")
@@ -79,7 +80,7 @@ def main():
      f.close()
 
      #open and read the file
-     f = open("demofile.tgffopt", "r")
+     f = open(tgffopt_file_name, "r")
      utils.clear()
      print("tgffopt file created")
      print(f.read())
