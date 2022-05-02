@@ -6,6 +6,12 @@
 *.tgff
 *.vcg
 
+# DOT
+*.dot
+
+# PNG
+*.png
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
