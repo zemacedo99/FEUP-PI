@@ -76,6 +76,10 @@ def main():
           f.write("\n")
           f.write("start_node " + start_node)
           f.write("\n")
+          f.write("tg_write\n")
+          f.write("eps_write\n")
+          
+
      
 
      f.close()
