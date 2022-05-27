@@ -18,6 +18,13 @@ def add_arc(arc_details):
     my_edge = pydot.Edge(src=arc_dets[2],dst=arc_dets[4],name= arc_dets[0],type=arc_dets[6])
     #create a new arc with    :name       ,pe_from    ,pe_to      ,type
     graph.add_edge(my_edge)
+
+def add_row(row):
+    #print(row)
+    row_values=[]
+    for i in row.split():
+        row_values.append(float(i))
+    print(row_values)
         
 def get_blocks(input_file):
     buf=[]
@@ -48,16 +55,17 @@ def process_block(block):
         core_name = None
         i = 0
         core_name= block[0].strip('@').strip('{')
-        print(core_name)
-        print(block[1].strip('#'))
-        print(block[2].strip('#'))
-        print(block[4].strip('#'))
+        #print(core_name)
+        #print(block[1].strip('#'))
+        #print(block[2].strip('#'))
+        #print(block[4].strip('#'))
         #create table
         for i in range(5, len(block)):
             if not block[i].startswith('#'):
                 #add_row to table
                 tablerow = block[i]
-                print(tablerow)
+                add_row(tablerow)
+                
     else:
         #Parse Tasks
         for line in block:

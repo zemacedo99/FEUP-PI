@@ -2,6 +2,7 @@ import os
 import sys
 import utils
 
+tgff_dir = "~/Documents/PI/TGFF/tgff-3.6/tgff "
 
 def main():
     
@@ -20,8 +21,6 @@ def main():
             os.system(create_graph)
         
         elif option == '2':
-            tgff_dir = "~/Documents/PI/TGFF/tgff-3.6/tgff "
-
             print("name of the tgffopt file: ")
             tgffopt_file_name = input()
             tgffopt_file = dir_path + '/'+ tgffopt_file_name

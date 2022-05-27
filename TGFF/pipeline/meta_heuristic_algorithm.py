@@ -19,7 +19,13 @@ def main():
     
     G = nx.drawing.nx_pydot.read_dot(dir_path+"/"+dot_file)
     nx.draw_networkx(G, with_labels=False)
-    plt.show()
+    #plt.show()
+    
+    for node in G.nodes:
+        print(node)
+    print(G.nodes.data())
+    
+    
     
     
     
