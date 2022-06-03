@@ -1,0 +1,20 @@
+# Sets the seed for the pseudo-random number generator
+seed 11
+
+# Sets the number of task graphs to generate
+tg_cnt 1
+
+task_unique true
+
+
+# Sets the minimum number of tasks per task graph (average, multiplier)
+task_cnt 20 5
+
+# Sets the maximum number of transmits (degree) per task (in, out)
+task_degree 3 2
+period_laxity 1
+period_mul 1, 0.5, 2
+
+
+task_attrib Hardware 2000 1260.12 , Software 2000 1250.60
+tg_write

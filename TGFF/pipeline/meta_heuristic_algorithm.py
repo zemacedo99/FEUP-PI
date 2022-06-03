@@ -22,8 +22,10 @@ def main():
     #plt.show()
     
     for node in G.nodes:
-        print(node)
-    print(G.nodes.data())
+        print("\nNode name: " + node)
+        print("Hardware time: " + G.nodes[node]['Hardware'])
+        print("Software time: " + G.nodes[node]['Software'])
+    #print(G.nodes.data())
     
     
     

@@ -9,8 +9,9 @@ def add_task(task_details):
     task_dets=task_details.split()
     #print(task_dets)
     #my_node = pydot.Node(task_dets[0],type = int(task_dets[2]),host = int(task_dets[4]))
-    my_node = pydot.Node(task_dets[0],type = int(task_dets[2]))
     #create a new task with      :name       ,type          ,host
+    #my_node = pydot.Node(task_dets[0],type = int(task_dets[2]))
+    my_node = pydot.Node(task_dets[0], Hardware = float(task_dets[4]),Software = float(task_dets[6]))
     graph.add_node(my_node)
 def add_arc(arc_details):
     arc_dets=arc_details.split()
@@ -112,7 +113,7 @@ def main():
         for block in get_blocks(input_file):
             process_block(block)
             
-
+     
     ### OUTPUT
     
     # As a string:
