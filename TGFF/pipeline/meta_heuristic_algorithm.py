@@ -74,7 +74,7 @@ def main():
     print("Index of Solution: " + str(indexOfSolution))
     print("Time of Solution: " + str(getCost(G,list[indexOfSolution])))
     
-    getNext(list,solution)
+    
 
     plt.scatter(indexOfSolution,getCost(G,list[indexOfSolution]),marker='X',s=200,color = '#000000')
     plotHistory(G,list,history)
@@ -160,7 +160,6 @@ def getNext(list,current_state):
     neighbors = []
     
     n_ocurrences = current_state.count(0)
-    print(n_ocurrences)
     
     
     while n_ocurrences > 0:
@@ -179,11 +178,9 @@ def getNext(list,current_state):
                     new_state.append(0)
                 count += 1
                     
-        neighbors.append(new_state)
-        print(new_state)
+        neighbors.append(tuple(new_state))
         n_ocurrences -= 1
         
-
     
             
     return neighbors
@@ -198,14 +195,16 @@ def simulated_annealing(graph,list):
 
 
     # Start by initializing the current state with the initial state
-    current_state = random.choice(list)
+    #current_state = random.choice(list)
+    current_state = list[0]
     solution = current_state
     history = [list.index(current_state)]
 
     while current_temp > final_temp:
 
         #neighbor = random.choice(getNeighbors(list,current_state))
-        neighbor = random.choice(list)
+        #neighbor = random.choice(list)
+        neighbor = random.choice(getNext(list,current_state))
 
         # Check if neighbor is best so far
         current_value = getCost(graph,current_state)
@@ -229,6 +228,7 @@ def simulated_annealing(graph,list):
            
         # decrement the temperature
         current_temp *= alpha
+       
         history.append(list.index(solution))
         
         
