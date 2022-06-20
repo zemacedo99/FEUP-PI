@@ -18,6 +18,8 @@ def add_arc(arc_details):
     #print(arc_dets)
     my_edge = pydot.Edge(src=arc_dets[2],dst=arc_dets[4],name= arc_dets[0],type=arc_dets[6])
     #create a new arc with    :name       ,pe_from    ,pe_to      ,type
+    #my_edge = pydot.Edge(src=arc_dets[2],dst=arc_dets[4],weight=arc_dets[6])
+
     graph.add_edge(my_edge)
 
 def add_row(row):
