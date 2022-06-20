@@ -1,4 +1,5 @@
 import random
+import sys
 import time
 from networkx.algorithms import approximation as approx
 import networkx as nx
@@ -8,6 +9,7 @@ import matplotlib.pyplot as plt
 import math
 import itertools
 import numpy as np
+import utils
 
 
 
@@ -17,7 +19,7 @@ def main():
     file_name = input()
     dot_file = file_name + ".dot"
     dir_path = os.path.dirname(os.path.realpath(__file__))
-    print(dir_path)
+    #print(dir_path)
     graphviz.Source.from_file(dot_file)
     
     G = nx.drawing.nx_pydot.read_dot(dir_path+"/"+dot_file)
@@ -38,12 +40,34 @@ def main():
         #print("Edge weight: " + str(G[source][target][0]['weight']))
         
     list = generate(G.number_of_nodes())
-
-    start_time = time.time()
-    solution,history = simulated_annealing(G,list)
-    #solution,history = simple_greedy_search(G,list)
-    end_time = time.time()
+    cost = plotCosts(G,list)
     
+    
+    option = 0;
+    while option != 3:
+        option = main_menu()
+        
+        if option == '1':
+            print("Simulated Annealing")
+            start_time = time.time()
+            solution,history = simulated_annealing(G,list)
+            end_time = time.time()
+            break
+        elif option == '2':
+            print("Simple Greedy Search")
+            start_time = time.time()
+            solution,history = simple_greedy_search(G,list)
+            end_time = time.time()
+            break
+        else:
+            print("Wrong option selection. Pls choose a valid option.")
+
+    print("-----------------------------------------------------------")
+    print("       Global Minimum     " + str(min(cost)))
+    print("    Global Minimum Index  " + str(cost.index(min(cost))))
+    print("        Real Solution     " + str(list[cost.index(min(cost))]))
+    print("-----------------------------------------------------------\n")
+
     indexOfSolution = list.index(solution)
     print('Time Elapsed:', end_time-start_time)
     print("Solution "+str(solution))
@@ -51,9 +75,10 @@ def main():
     print("Time of Solution: " + str(getCost(G,list[indexOfSolution])))
 
     plt.scatter(indexOfSolution,getCost(G,list[indexOfSolution]),marker='X',s=200,color = '#000000')
-    plotCosts(G,list)
     plotHistory(G,list,history)
     plt.show()
+    
+    
     
     
     
@@ -195,6 +220,19 @@ def simple_greedy_search(graph,list,N=1000):
     
     return solution,history
 
+
+def main_menu():       
+    print ("\n" + 30 * "-" , "MENU" , 30 * "-")
+    print ("1. Simple Greedy Search")
+    print ("2. Simulated Annealing")
+    print ("3. Exit")
+    print (67 * "-" )
+    option = input("Enter your choice [1-3]: ")
+    utils.clear()
+    if option == '3':
+        print("Exit")
+        sys.exit(1)
+    return option
 
 main()
     
