@@ -43,9 +43,9 @@ def main():
     cost = plotCosts(G,list)
     
     
-    option = 0;
+    option = '1';
     while option != 3:
-        option = main_menu()
+        #option = main_menu()
         
         if option == '1':
             print("Simulated Annealing")
@@ -73,6 +73,8 @@ def main():
     print("Solution "+str(solution))
     print("Index of Solution: " + str(indexOfSolution))
     print("Time of Solution: " + str(getCost(G,list[indexOfSolution])))
+    
+    getNext(list,solution)
 
     plt.scatter(indexOfSolution,getCost(G,list[indexOfSolution]),marker='X',s=200,color = '#000000')
     plotHistory(G,list,history)
@@ -149,6 +151,39 @@ def getNeighbors(list,current_state):
         neighbors.append(list[index+1])
     else:
         neighbors.append(list[index])
+    
+            
+    return neighbors
+
+def getNext(list,current_state):
+    
+    neighbors = []
+    
+    n_ocurrences = current_state.count(0)
+    print(n_ocurrences)
+    
+    
+    while n_ocurrences > 0:
+        new_state = []
+        findZero = False
+        count = 1
+        
+        for number in current_state:
+            if(number == 1):
+                new_state.append(1)
+            else:
+                if((not findZero) and count == n_ocurrences):
+                    new_state.append(1)
+                    findZero = True
+                else:
+                    new_state.append(0)
+                count += 1
+                    
+        neighbors.append(new_state)
+        print(new_state)
+        n_ocurrences -= 1
+        
+
     
             
     return neighbors
