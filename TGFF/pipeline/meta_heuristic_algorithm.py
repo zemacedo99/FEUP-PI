@@ -1,4 +1,5 @@
 import random
+import time
 from networkx.algorithms import approximation as approx
 import networkx as nx
 import os
@@ -38,9 +39,12 @@ def main():
         
     list = generate(G.number_of_nodes())
 
+    start_time = time.time()
     solution,history = simulated_annealing(G,list)
+    end_time = time.time()
     
     indexOfSolution = list.index(solution)
+    print('Time Elapsed:', end_time-start_time)
     print("Solution "+str(solution))
     print("Index of Solution: " + str(indexOfSolution))
     print("Time of Solution: " + str(getCost(G,list[indexOfSolution])))
@@ -127,11 +131,10 @@ def getNeighbors(list,current_state):
 
 def simulated_annealing(graph,list):
     """Peforms simulated annealing to find a solution"""
-    initial_temp = 100
-    final_temp = .1
-    alpha = 0.01
+    current_temp = 1000
+    final_temp = 0.1
+    alpha = 0.9
 
-    current_temp = initial_temp
 
     # Start by initializing the current state with the initial state
     current_state = random.choice(list)
@@ -144,18 +147,29 @@ def simulated_annealing(graph,list):
         neighbor = random.choice(list)
 
         # Check if neighbor is best so far
-        cost_diff = getCost(graph,current_state) - getCost(graph,neighbor)
+        current_value = getCost(graph,current_state)
+        neighbor_value = getCost(graph,neighbor)
+        cost_diff = current_value - neighbor_value
 
         # if the new solution is better, accept it
         if cost_diff > 0:
             solution = neighbor
+            
         # if the new solution is not better, accept it with a probability of e^(-cost/temp)
         else:
-            if random.uniform(0, 1) < math.exp(cost_diff / current_temp):
+            n_random = np.random.rand()
+            E = -abs(neighbor_value-current_value) # E<0
+            p_accept = np.exp(E/current_temp)
+            
+            if n_random < p_accept: #if random.uniform(0, 1) < math.exp(cost_diff / current_temp):
                 solution = neighbor
+                
+            # else: do nothing, keep iterating
+           
         # decrement the temperature
-        current_temp -= alpha
+        current_temp *= alpha
         history.append(list.index(solution))
+        
         
 
     return solution,history
