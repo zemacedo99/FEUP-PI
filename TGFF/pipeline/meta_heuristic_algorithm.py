@@ -38,13 +38,17 @@ def main():
         
     list = generate(G.number_of_nodes())
 
-    solution = simulated_annealing(G,list)
+    solution,history = simulated_annealing(G,list)
     
     indexOfSolution = list.index(solution)
     print("Solution "+str(solution))
     print("Index of Solution: " + str(indexOfSolution))
     print("Time of Solution: " + str(getCost(G,list[indexOfSolution])))
+
+    plt.scatter(indexOfSolution,getCost(G,list[indexOfSolution]),marker='X',s=200,color = '#000000')
     plotCosts(G,list)
+    plotHistory(G,list,history)
+    plt.show()
     
     
     
@@ -58,10 +62,22 @@ def plotCosts(G,list):
     x = np.arange(0, len(list)) 
     y = np.array(costList)
 
-    plt.plot(x,y) 
-    plt.show()
-    
+    plt.plot(x,y,alpha=0.8) 
     return costList
+
+def plotHistory(G,list,history):
+    historyCost = []
+    for i in range(0,len(history)):
+        cost = getCost(G,list[history[i]])
+        historyCost.append(cost)
+        
+
+    xHistory= np.array(history)
+    yHistory = np.array(historyCost)
+    
+    plt.plot(xHistory,yHistory,alpha=0.5)
+    
+    return historyCost
 
 def generate(lenght):
     list = []
@@ -111,7 +127,7 @@ def getNeighbors(list,current_state):
 
 def simulated_annealing(graph,list):
     """Peforms simulated annealing to find a solution"""
-    initial_temp = 90
+    initial_temp = 100
     final_temp = .1
     alpha = 0.01
 
@@ -120,10 +136,12 @@ def simulated_annealing(graph,list):
     # Start by initializing the current state with the initial state
     current_state = random.choice(list)
     solution = current_state
+    history = [list.index(current_state)]
 
     while current_temp > final_temp:
 
-        neighbor = random.choice(getNeighbors(list,current_state))
+        #neighbor = random.choice(getNeighbors(list,current_state))
+        neighbor = random.choice(list)
 
         # Check if neighbor is best so far
         cost_diff = getCost(graph,current_state) - getCost(graph,neighbor)
@@ -137,8 +155,10 @@ def simulated_annealing(graph,list):
                 solution = neighbor
         # decrement the temperature
         current_temp -= alpha
+        history.append(list.index(solution))
+        
 
-    return solution
+    return solution,history
 
 
 
