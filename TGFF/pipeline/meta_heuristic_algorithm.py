@@ -38,10 +38,13 @@ def main():
         
     list = generate(G.number_of_nodes())
 
-
-    plotCosts(G,list)
+    solution = simulated_annealing(G,list)
     
-        
+    indexOfSolution = list.index(solution)
+    print("Solution "+str(solution))
+    print("Index of Solution: " + str(indexOfSolution))
+    print("Time of Solution: " + str(getCost(G,list[indexOfSolution])))
+    plotCosts(G,list)
     
     
 def plotCosts(G,list):
@@ -69,7 +72,6 @@ def generate(lenght):
     
 def getCost(graph,state):
     
-    #for value in state:
     count = -1
     sum = 0
     for node in graph.nodes:
@@ -81,10 +83,43 @@ def getCost(graph,state):
             #print("Hardware time: " + graph.nodes[node]['Hardware'])
             sum = sum + float(graph.nodes[node]['Hardware'])
             
-        
-        
     return sum
-    
+
+
+
+def simulated_annealing(graph,list):
+    """Peforms simulated annealing to find a solution"""
+    initial_temp = 90
+    final_temp = .1
+    alpha = 0.01
+
+    current_temp = initial_temp
+
+    # Start by initializing the current state with the initial state
+    current_state = random.choice(list)
+    solution = current_state
+
+    while current_temp > final_temp:
+        #TODO: get neighbors
+        neighbor = random.choice(list)
+
+        # Check if neighbor is best so far
+        cost_diff = getCost(graph,current_state) - getCost(graph,neighbor)
+
+        # if the new solution is better, accept it
+        if cost_diff > 0:
+            solution = neighbor
+        # if the new solution is not better, accept it with a probability of e^(-cost/temp)
+        else:
+            if random.uniform(0, 1) < math.exp(cost_diff / current_temp):
+                solution = neighbor
+        # decrement the temperature
+        current_temp -= alpha
+
+    return solution
+
+
+
 main()
     
     
