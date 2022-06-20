@@ -47,6 +47,7 @@ def main():
     plotCosts(G,list)
     
     
+    
 def plotCosts(G,list):
     costList = []
     for i in range(0,len(list)):
@@ -85,6 +86,27 @@ def getCost(graph,state):
             
     return sum
 
+def getNeighbors(list,current_state):
+    
+    neighbors = []
+    
+    
+    index = list.index(current_state)
+
+    
+    if(index != 0):
+        neighbors.append(list[index-1])
+    else:
+        neighbors.append(list[index])
+        
+    if(index != len(list)):
+        neighbors.append(list[index+1])
+    else:
+        neighbors.append(list[index])
+    
+            
+    return neighbors
+
 
 
 def simulated_annealing(graph,list):
@@ -100,8 +122,8 @@ def simulated_annealing(graph,list):
     solution = current_state
 
     while current_temp > final_temp:
-        #TODO: get neighbors
-        neighbor = random.choice(list)
+
+        neighbor = random.choice(getNeighbors(list,current_state))
 
         # Check if neighbor is best so far
         cost_diff = getCost(graph,current_state) - getCost(graph,neighbor)
