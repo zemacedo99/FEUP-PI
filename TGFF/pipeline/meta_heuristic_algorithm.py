@@ -41,6 +41,7 @@ def main():
 
     start_time = time.time()
     solution,history = simulated_annealing(G,list)
+    #solution,history = simple_greedy_search(G,list)
     end_time = time.time()
     
     indexOfSolution = list.index(solution)
@@ -174,6 +175,25 @@ def simulated_annealing(graph,list):
 
     return solution,history
 
+def simple_greedy_search(graph,list,N=1000):
+    # Start by initializing the current state with the initial state
+    solution = random.choice(list)
+    history = [list.index(solution)]
+    
+    for i in range(N):
+        history.append(list.index(solution))
+        u = np.random.rand() #some noise
+        
+        xLeft,xRight = getNeighbors(list,solution)
+        yLeft,yRight = getCost(graph,xLeft),getCost(graph,xRight)
+        
+        if(yLeft>yRight):
+            solution = xLeft
+        else:
+            solution = xRight
+        
+    
+    return solution,history
 
 
 main()
